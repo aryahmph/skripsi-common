@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package product;
+
+import "proto/product/type.proto";
+
+option go_package = "github.com/aryahmph/skripsi-common/protogen/product";
+
+message GetProductRequest {
+  int32 id = 1;
+}
+
+message GetProductResponse {
+  product.Product product = 1;
+}
+
+service ProductService {
+  rpc GetProduct (GetProductRequest) returns (GetProductResponse);
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package product;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/aryahmph/skripsi-common/protogen/product";
+
+message Product {
+  int32 id = 1;
+  string name = 2;
+  int64 price = 3;
+  int32 stock = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
