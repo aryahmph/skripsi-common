@@ -16,4 +16,5 @@ message GetTicketResponse {
 
 service TicketService {
   rpc GetTicket (GetTicketRequest) returns (GetTicketResponse);
+  rpc GetAvailableTicket (GetTicketRequest) returns (GetTicketResponse);
 }

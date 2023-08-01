@@ -8,9 +8,10 @@ option go_package = "github.com/aryahmph/skripsi-common/protogen/order";
 
 message Order {
   string id = 1;
-  string ticket_id = 2;
-  int64 amount = 3;
-  string order_status = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Timestamp updated_at = 6;
+  string user_id = 2;
+  string ticket_id = 3;
+  int64 amount = 4;
+  string order_status = 5;
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
 }

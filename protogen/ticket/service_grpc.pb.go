@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	TicketService_GetTicket_FullMethodName = "/ticket.TicketService/GetTicket"
+	TicketService_GetTicket_FullMethodName          = "/ticket.TicketService/GetTicket"
+	TicketService_GetAvailableTicket_FullMethodName = "/ticket.TicketService/GetAvailableTicket"
 )
 
 // TicketServiceClient is the client API for TicketService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TicketServiceClient interface {
 	GetTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
+	GetAvailableTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error)
 }
 
 type ticketServiceClient struct {
@@ -46,11 +48,21 @@ func (c *ticketServiceClient) GetTicket(ctx context.Context, in *GetTicketReques
 	return out, nil
 }
 
+func (c *ticketServiceClient) GetAvailableTicket(ctx context.Context, in *GetTicketRequest, opts ...grpc.CallOption) (*GetTicketResponse, error) {
+	out := new(GetTicketResponse)
+	err := c.cc.Invoke(ctx, TicketService_GetAvailableTicket_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TicketServiceServer is the server API for TicketService service.
 // All implementations must embed UnimplementedTicketServiceServer
 // for forward compatibility
 type TicketServiceServer interface {
 	GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
+	GetAvailableTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error)
 	mustEmbedUnimplementedTicketServiceServer()
 }
 
@@ -60,6 +72,9 @@ type UnimplementedTicketServiceServer struct {
 
 func (UnimplementedTicketServiceServer) GetTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTicket not implemented")
+}
+func (UnimplementedTicketServiceServer) GetAvailableTicket(context.Context, *GetTicketRequest) (*GetTicketResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvailableTicket not implemented")
 }
 func (UnimplementedTicketServiceServer) mustEmbedUnimplementedTicketServiceServer() {}
 
@@ -92,6 +107,24 @@ func _TicketService_GetTicket_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TicketService_GetAvailableTicket_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTicketRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TicketServiceServer).GetAvailableTicket(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: TicketService_GetAvailableTicket_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TicketServiceServer).GetAvailableTicket(ctx, req.(*GetTicketRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // TicketService_ServiceDesc is the grpc.ServiceDesc for TicketService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -102,6 +135,10 @@ var TicketService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTicket",
 			Handler:    _TicketService_GetTicket_Handler,
+		},
+		{
+			MethodName: "GetAvailableTicket",
+			Handler:    _TicketService_GetAvailableTicket_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
