@@ -1,7 +1,5 @@
 package http
 
-package http
-
 const (
 	BEARER = len("Bearer ")
 
