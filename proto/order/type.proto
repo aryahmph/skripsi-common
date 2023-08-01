@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package order;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/aryahmph/skripsi-common/protogen/order";
+
+message Order {
+  string id = 1;
+  string ticket_id = 2;
+  int64 amount = 3;
+  string order_status = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}

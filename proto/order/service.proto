@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package order;
+
+import "proto/order/type.proto";
+
+option go_package = "github.com/aryahmph/skripsi-common/protogen/order";
+
+message GetOrderRequest {
+  int32 id = 1;
+}
+
+message GetOrderResponse {
+  order.Order order = 1;
+}
+
+service OrderService {
+  rpc GetProduct (GetOrderRequest) returns (GetOrderResponse);
+}
