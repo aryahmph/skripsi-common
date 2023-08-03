@@ -12,6 +12,4 @@ message Order {
   string ticket_id = 3;
   int64 amount = 4;
   string order_status = 5;
-  google.protobuf.Timestamp created_at = 6;
-  google.protobuf.Timestamp updated_at = 7;
 }
