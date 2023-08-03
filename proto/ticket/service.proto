@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package ticket;
+
+import "proto/ticket/type.proto";
+
+option go_package = "github.com/aryahmph/skripsi-common/protogen/ticket";
+
+message GetTicketRequest {
+  string id = 1;
+}
+
+message GetTicketResponse {
+  ticket.Ticket ticket = 1;
+}
+
+service TicketService {
+  rpc GetTicket (GetTicketRequest) returns (GetTicketResponse);
+  rpc GetAvailableTicket (GetTicketRequest) returns (GetTicketResponse);
+}
