@@ -6,3 +6,4 @@ protoc:
 	--go-grpc_opt=module=${GO_MODULE} --go-grpc_out=. \
 	./proto/ticket/*.proto \
 	./proto/order/*.proto \
+	./proto/payment/*.proto \

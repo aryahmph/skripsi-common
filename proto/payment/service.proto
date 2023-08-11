@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package payment;
+
+import "proto/payment/type.proto";
+
+option go_package = "github.com/aryahmph/skripsi-common/protogen/payment";
+
+message GetPaymentByOrderIDRequest {
+  string order_id = 1;
+  string user_id = 2;
+}
+
+message GetPaymentResponse {
+  payment.Payment payment = 1;
+}
+
+service PaymentService {
+  rpc GetPaymentByOrderID (GetPaymentByOrderIDRequest) returns (GetPaymentResponse);
+}

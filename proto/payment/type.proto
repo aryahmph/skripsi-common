@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package payment;
+
+option go_package = "github.com/aryahmph/skripsi-common/protogen/payment";
+
+message Payment {
+  string id = 1;
+  string order_id = 2;
+  string user_id = 3;
+  int64 amount = 4;
+  string payment_bank = 5;
+  string payment_status = 6;
+}
